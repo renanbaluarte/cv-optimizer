@@ -1,0 +1,90 @@
+:root {
+  --bulma-family-primary: var(--font-plex-sans), system-ui, sans-serif;
+  --bulma-family-code: var(--font-plex-mono), ui-monospace, monospace;
+  --bulma-primary-h: 152deg;
+  --bulma-primary-s: 38%;
+  --bulma-primary-l: 32%;
+  --bulma-link-h: 152deg;
+  --bulma-link-s: 38%;
+  --bulma-link-l: 32%;
+  --bulma-radius: 4px;
+  --bulma-radius-large: 6px;
+  --app-rule: hsl(0, 0%, 86%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bulma-primary-l: 52%;
+    --bulma-link-l: 58%;
+    --app-rule: hsl(0, 0%, 24%);
+  }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > main {
+  flex: 1;
+}
+
+.app-navbar {
+  border-bottom: 1px solid var(--app-rule);
+}
+
+.app-brand {
+  font-family: var(--bulma-family-code);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.app-brand span {
+  color: var(--bulma-primary);
+}
+
+.app-footer {
+  border-top: 1px solid var(--app-rule);
+  padding: 1.25rem 1.5rem;
+}
+
+.section-label {
+  font-family: var(--bulma-family-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bulma-text-weak);
+  margin-bottom: 0.75rem;
+}
+
+.textarea.is-cv {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  min-height: 18rem;
+}
+
+.score {
+  font-family: var(--bulma-family-code);
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.report-block + .report-block {
+  border-top: 1px solid var(--app-rule);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.rewritten {
+  border-left: 3px solid var(--bulma-primary);
+  padding: 0.25rem 0 0.25rem 1rem;
+  white-space: pre-line;
+}
+
+.mono {
+  font-family: var(--bulma-family-code);
+  font-variant-numeric: tabular-nums;
+}
