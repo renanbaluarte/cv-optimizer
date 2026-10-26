@@ -33,8 +33,8 @@ export async function consumeLlmQuota(sessionId: string): Promise<boolean> {
     return false;
   }
   if (
-    bySession >= limitFromEnv("RATE_LIMIT_PER_SESSION_HOUR", 10) ||
-    byIp >= limitFromEnv("RATE_LIMIT_PER_IP_HOUR", 30)
+    bySession >= limitFromEnv("RATE_LIMIT_PER_SESSION_HOUR", 3) ||
+    byIp >= limitFromEnv("RATE_LIMIT_PER_IP_HOUR", 3)
   ) {
     return false;
   }

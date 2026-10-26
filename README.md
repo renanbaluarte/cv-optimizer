@@ -28,7 +28,7 @@ Stored JSON is also revalidated on read, and the database has a `CHECK` constrai
 
 ### Security
 - **Signed anonymous session:** an `HttpOnly` + `SameSite=Lax` cookie (`Secure` in production) holding a UUID signed with HMAC-SHA256 and compared with `timingSafeEqual`. History is isolated per session and every query filters by `sessionId`, so an analysis id alone does not grant access to it (IDOR protection).
-- **Rate limiting persisted in Postgres:** works across serverless instances. Limits per session (10/h), per IP (30/h, with the IP stored only as an HMAC) and a global daily cap (500) to control cost. All values are configurable through environment variables.
+- **Rate limiting persisted in Postgres:** works across serverless instances. Limits per session (3/h), per IP (3/h, with the IP stored only as an HMAC) and a global daily cap (500) to control cost. All values are configurable through environment variables.
 - **Server-side validation:** every Server Action validates its input with Zod and caps text length. Origin-based CSRF protection comes built into Server Actions.
 - **Prompt injection:** the resume and job posting are delimited as data, and the model is instructed not to follow instructions inside them. Output is restricted to the schema and rendered as text (React escapes it).
 - **Privacy:** resume text never goes to the logs. The Gemini key exists only on the server, and users can delete their analyses.
