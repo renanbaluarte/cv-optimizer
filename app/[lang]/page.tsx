@@ -13,20 +13,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <main>
       <section className="section">
         <div className="container">
-          <h1 className="title is-4">{dict.home.title}</h1>
-          <p className="subtitle is-6 has-text-grey">{dict.home.subtitle}</p>
+          <header className="intro">
+            <h1 className="title is-1 is-size-2-mobile">{dict.home.title}</h1>
+            <p className="lede">{dict.home.subtitle}</p>
+          </header>
           <AnalyzeForm locale={lang} dict={dict} />
         </div>
       </section>
 
-      <section className="section pt-0">
-        <div className="container">
-          <h2 className="section-label">{dict.home.history}</h2>
-          <Suspense fallback={<p className="has-text-grey">{dict.home.loadingHistory}</p>}>
-            <HistoryList locale={lang} dict={dict} />
-          </Suspense>
-        </div>
-      </section>
+      <Suspense fallback={null}>
+        <HistoryList locale={lang} dict={dict} />
+      </Suspense>
     </main>
   );
 }

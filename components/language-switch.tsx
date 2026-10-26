@@ -6,21 +6,24 @@ import { locales, type Locale } from "@/lib/i18n";
 
 type Props = { current: Locale; label: string };
 
-export function LanguageLinks({ current, label, rest = "" }: Props & { rest?: string }) {
+export function LanguageLinks({
+  current,
+  label,
+  rest = "",
+}: Props & { rest?: string }) {
   return (
-    <div className="buttons has-addons" role="group" aria-label={label}>
+    <nav className="lang-switch" aria-label={label}>
       {locales.map((locale) => (
         <Link
           key={locale}
           href={`/${locale}${rest}`}
           hrefLang={locale}
           aria-current={locale === current ? "true" : undefined}
-          className={`button is-small mono ${locale === current ? "is-primary is-selected" : ""}`}
         >
           {locale.toUpperCase()}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }
 

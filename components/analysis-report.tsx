@@ -11,10 +11,18 @@ function scoreTone(score: number, report: Dictionary["report"]) {
   return { color: "danger", label: report.low };
 }
 
-function ListBlock({ title, items, empty }: { title: string; items: string[]; empty: string }) {
+function ListBlock({
+  title,
+  items,
+  empty,
+}: {
+  title: string;
+  items: string[];
+  empty: string;
+}) {
   return (
     <div className="column">
-      <h3 className="section-label">{title}</h3>
+      <h3 className="title is-6 mb-3">{title}</h3>
       {items.length ? (
         <div className="content">
           <ul className="mt-0">
@@ -30,7 +38,13 @@ function ListBlock({ title, items, empty }: { title: string; items: string[]; em
   );
 }
 
-export function AnalysisReport({ analysis, dict }: { analysis: AnalysisView; dict: Dictionary }) {
+export function AnalysisReport({
+  analysis,
+  dict,
+}: {
+  analysis: AnalysisView;
+  dict: Dictionary;
+}) {
   const { score, feedback } = analysis;
   const t = dict.report;
   const tone = scoreTone(score, t);
@@ -62,23 +76,31 @@ export function AnalysisReport({ analysis, dict }: { analysis: AnalysisView; dic
   return (
     <article className="box">
       <div className="report-block">
-        <p className="section-label">{analysis.jobTitle}</p>
-        <div className="is-flex is-align-items-baseline mb-3" style={{ gap: "0.75rem" }}>
+        <h2 className="title is-3 mb-4">{analysis.jobTitle}</h2>
+        <div
+          className="is-flex is-align-items-baseline mb-4"
+          style={{ gap: "0.75rem" }}
+        >
           <span className={`score has-text-${tone.color}`}>{score}</span>
           <span className="has-text-grey">/ 100 · {tone.label}</span>
         </div>
-        <progress className={`progress is-small is-${tone.color}`} value={score} max={100} aria-label={t.scoreLabel}>
+        <progress
+          className={`progress is-small is-${tone.color}`}
+          value={score}
+          max={100}
+          aria-label={t.scoreLabel}
+        >
           {score}%
         </progress>
         {feedback.summary && <p>{feedback.summary}</p>}
       </div>
 
       <div className="report-block">
-        <h3 className="section-label">{t.missingKeywords}</h3>
+        <h3 className="title is-6 mb-3">{t.missingKeywords}</h3>
         {feedback.missingKeywords.length ? (
           <div className="tags">
             {feedback.missingKeywords.map((keyword) => (
-              <span key={keyword} className="tag is-danger is-light mono">
+              <span key={keyword} className="tag is-danger is-light">
                 {keyword}
               </span>
             ))}
@@ -90,15 +112,23 @@ export function AnalysisReport({ analysis, dict }: { analysis: AnalysisView; dic
 
       <div className="report-block">
         <div className="columns">
-          <ListBlock title={t.strengths} items={feedback.strengths} empty={t.noStrengths} />
-          <ListBlock title={t.improvements} items={feedback.improvements} empty={t.noImprovements} />
+          <ListBlock
+            title={t.strengths}
+            items={feedback.strengths}
+            empty={t.noStrengths}
+          />
+          <ListBlock
+            title={t.improvements}
+            items={feedback.improvements}
+            empty={t.noImprovements}
+          />
         </div>
       </div>
 
       <div className="report-block">
         <div className="level is-mobile mb-3">
           <div className="level-left">
-            <h3 className="section-label mb-0">{t.rewriteTitle}</h3>
+            <h3 className="title is-6 mb-0">{t.rewriteTitle}</h3>
           </div>
           <div className="level-right">
             <button
@@ -114,14 +144,16 @@ export function AnalysisReport({ analysis, dict }: { analysis: AnalysisView; dic
         {rewritten ? (
           <>
             <p className="rewritten">{rewritten}</p>
-            <button type="button" onClick={handleCopy} className="button is-small is-text mt-2">
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="button is-small is-text mt-2"
+            >
               {copied ? t.copied : t.copy}
             </button>
           </>
         ) : (
-          <p className="has-text-grey is-size-7">
-            {t.rewriteHint}
-          </p>
+          <p className="has-text-grey is-size-7">{t.rewriteHint}</p>
         )}
         {error && (
           <p role="alert" className="help is-danger">
@@ -129,6 +161,8 @@ export function AnalysisReport({ analysis, dict }: { analysis: AnalysisView; dic
           </p>
         )}
       </div>
+
+      <p className="report-block is-size-7 has-text-grey">{t.disclaimer}</p>
     </article>
   );
 }
